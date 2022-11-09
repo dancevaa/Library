@@ -3,13 +3,14 @@ import dto.Book;
 import dto.Role;
 import service.LibraryService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static ArrayList<Book> books = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LibraryService library = new LibraryService();
         boolean isLibraryOpen = true;
         do {

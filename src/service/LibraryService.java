@@ -9,8 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LibraryService {
+    public static Scanner scanner = new Scanner(System.in);
+    public static final boolean ADD = Menu.getChoosingAction().equalsIgnoreCase("add");
+    public static final boolean DELETE = Menu.getChoosingAction().equalsIgnoreCase("delete");
+    public static final boolean READ = Menu.getChoosingAction().equalsIgnoreCase("read");
     public static final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     public static final String CONTENT_FILE = "/content_of_book.txt";
     private List<Book> books;
@@ -70,5 +75,33 @@ public class LibraryService {
 
     public void addAccount(String name, String surname, Role role){
         accounts.add(new Account(name, surname, role));
+    }
+
+    public static void OpenLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
+        do {
+            Login.login();
+            if (Login.isAccountNotExist(library, Login.getYourName(), Login.getYourSurname())) {
+                Login.addingAccount(library);
+            }
+            boolean doSomething = true;
+            do {
+                if (Login.isAccountOfAdmin(library, Login.getYourName(), Login.getYourSurname(), Role.ADMIN)) {
+                    Menu.choosingAction();
+                    if (ADD) {
+                        NewBook.addingNewBook(library);
+                    } else if (DELETE) {
+                        NewBook.deletingOfBook(library);
+                    } else if (READ) {
+                        NewBook.readingOfBook(library);
+                    }
+
+                } else if (Login.isAccountOfAdmin(library, Login.getYourName(), Login.getYourSurname(), Role.USER)) {
+                    NewBook.readingOfBook(library);
+                }
+                doSomething = Menu.isDoSomething(doSomething);
+            }
+            while (doSomething == true);
+        }
+        while (isLibraryOpen);
     }
 }

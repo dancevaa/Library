@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="implementation of adding books to file and delete them from file">
-      <change afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="implementation of adding books to file and delete them from file, get account from library, is account of admin, is account not exist, adding new account">
+      <change afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/NewBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667998597619</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="implementation of adding books to file and delete them from file, get account from library, is account of admin, is account not exist, adding new account">
+      <created>1668115105914</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668115105914</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +136,7 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="implementation of main method" />
     <MESSAGE value="implementation of adding books to file and delete them from file" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementation of adding books to file and delete them from file" />
+    <MESSAGE value="implementation of adding books to file and delete them from file, get account from library, is account of admin, is account not exist, adding new account" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementation of adding books to file and delete them from file, get account from library, is account of admin, is account not exist, adding new account" />
   </component>
 </project>

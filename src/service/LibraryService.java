@@ -13,9 +13,9 @@ import java.util.Scanner;
 
 public class LibraryService {
     public static Scanner scanner = new Scanner(System.in);
-    public static final boolean ADD = Menu.getChoosingAction().equalsIgnoreCase("add");
-    public static final boolean DELETE = Menu.getChoosingAction().equalsIgnoreCase("delete");
-    public static final boolean READ = Menu.getChoosingAction().equalsIgnoreCase("read");
+//    public static final boolean ADD ;
+//    public static final boolean DELETE = ;
+//    public static final boolean READ;
     public static final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     public static final String CONTENT_FILE = "/content_of_book.txt";
     private List<Book> books;
@@ -87,11 +87,11 @@ public class LibraryService {
             do {
                 if (Login.isAccountOfAdmin(library, Login.getYourName(), Login.getYourSurname(), Role.ADMIN)) {
                     Menu.choosingAction();
-                    if (ADD) {
+                    if (Menu.getChoosingAction().equalsIgnoreCase("add")) {
                         NewBook.addingNewBook(library);
-                    } else if (DELETE) {
+                    } else if (Menu.getChoosingAction().equalsIgnoreCase("delete")) {
                         NewBook.deletingOfBook(library);
-                    } else if (READ) {
+                    } else if (Menu.getChoosingAction().equalsIgnoreCase("read")) {
                         NewBook.readingOfBook(library);
                     }
 

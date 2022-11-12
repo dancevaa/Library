@@ -1,8 +1,8 @@
 package dto;
 
 public class Account {
-    private String name;
-    private String surname;
+    private final String name;
+    private final String surname;
     private Role role;
 
     public Account(String name, String surname, Role role) {

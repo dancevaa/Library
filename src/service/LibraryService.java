@@ -13,9 +13,6 @@ import java.util.Scanner;
 
 public class LibraryService {
     public static Scanner scanner = new Scanner(System.in);
-//    public static final boolean ADD ;
-//    public static final boolean DELETE = ;
-//    public static final boolean READ;
     public static final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     public static final String CONTENT_FILE = "/content_of_book.txt";
     private List<Book> books;
@@ -76,29 +73,34 @@ public class LibraryService {
     public void addAccount(String name, String surname, Role role){
         accounts.add(new Account(name, surname, role));
     }
+    public Account getAccountFromLibrary(LibraryService library, String name, String surname) {
+        return library.getAccounts().stream().filter(account -> name.equals(account.getName()) && surname.equals(account.getSurname())).findFirst().stream().toList().get(0);
+    }
 
-    public static void OpenLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
-        do {
-            Login.login();
-            if (Login.isAccountNotExist(library, Login.getYourName(), Login.getYourSurname())) {
-                Login.addingAccount(library);
+    public static void openLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
+        do {Login newLogin = new Login();
+            newLogin.login();
+            if (newLogin.isAccountNotExist(library, newLogin.getYourName(), newLogin.getYourSurname())) {
+                newLogin.addingAccount(library);
             }
             boolean doSomething = true;
             do {
-                if (Login.isAccountOfAdmin(library, Login.getYourName(), Login.getYourSurname(), Role.ADMIN)) {
-                    Menu.choosingAction();
-                    if (Menu.getChoosingAction().equalsIgnoreCase("add")) {
-                        NewBook.addingNewBook(library);
-                    } else if (Menu.getChoosingAction().equalsIgnoreCase("delete")) {
-                        NewBook.deletingOfBook(library);
-                    } else if (Menu.getChoosingAction().equalsIgnoreCase("read")) {
-                        NewBook.readingOfBook(library);
+                Menu menu = new Menu();
+                NewBook newBook = new NewBook();
+                if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.ADMIN)) {
+                    menu.choosingAction();
+                    if (menu.getChoosingAction().equalsIgnoreCase("add")) {
+                        newBook.addingNewBook(library);
+                    } else if (menu.getChoosingAction().equalsIgnoreCase("delete")) {
+                        newBook.deletingOfBook(library);
+                    } else if (menu.getChoosingAction().equalsIgnoreCase("read")) {
+                        newBook.readingOfBook(library);
                     }
 
-                } else if (Login.isAccountOfAdmin(library, Login.getYourName(), Login.getYourSurname(), Role.USER)) {
-                    NewBook.readingOfBook(library);
+                } else if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.USER)) {
+                    newBook.readingOfBook(library);
                 }
-                doSomething = Menu.isDoSomething(doSomething);
+                doSomething = menu.isDoSomething(doSomething);
             }
             while (doSomething == true);
         }

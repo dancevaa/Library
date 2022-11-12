@@ -1,27 +1,27 @@
 package service;
 
 public class Menu {
-    private static String choosingAction;
+    private String choosingAction;
 
-    public static String getChoosingAction() {
-        return choosingAction;
+    public  String getChoosingAction() {
+        return this.choosingAction;
     }
 
-    public static void setChoosingAction(String choosingAction) {
-        Menu.choosingAction = choosingAction;
+    public void setChoosingAction(String choosingAction) {
+        this.choosingAction = choosingAction;
     }
 
-    public static boolean isDoSomething(boolean doSomething) {
+    public boolean isDoSomething(boolean doSomething) {
         System.out.println(" ");
         System.out.println("Do you want to do something else? Write YES or NO");
-        Menu.setChoosingAction(LibraryService.scanner.nextLine());
-        while (!Menu.getChoosingAction().equalsIgnoreCase("yes") && !Menu.getChoosingAction().equalsIgnoreCase("no")) {
+        this.setChoosingAction(LibraryService.scanner.nextLine());
+        while (!this.getChoosingAction().equalsIgnoreCase("yes") && !this.getChoosingAction().equalsIgnoreCase("no")) {
             System.out.println("Write YES or NO");
-            Menu.setChoosingAction(LibraryService.scanner.nextLine());
+            this.setChoosingAction(LibraryService.scanner.nextLine());
         }
-        if (Menu.getChoosingAction().equalsIgnoreCase("yes")) {
+        if (this.getChoosingAction().equalsIgnoreCase("yes")) {
             doSomething = true;
-        } else if (Menu.getChoosingAction().equalsIgnoreCase("no")) {
+        } else if (this.getChoosingAction().equalsIgnoreCase("no")) {
             doSomething = false;
             System.out.println("The next one");
         }
@@ -30,12 +30,12 @@ public class Menu {
 
 
 
-    public static void choosingAction() {
+    public void choosingAction() {
         System.out.println("Do you want to add book, delete or read? Write please ADD, DELETE, or READ");
-        Menu.setChoosingAction(LibraryService.scanner.nextLine());
-        while (!Menu.getChoosingAction().equalsIgnoreCase("add") && !Menu.getChoosingAction().equalsIgnoreCase("delete") && !Menu.getChoosingAction().equalsIgnoreCase("read")) {
+        this.setChoosingAction(LibraryService.scanner.nextLine());
+        while (!this.getChoosingAction().equalsIgnoreCase("add") && !this.getChoosingAction().equalsIgnoreCase("delete") && !this.getChoosingAction().equalsIgnoreCase("read")) {
             System.out.println("Write correct action");
-            Menu.setChoosingAction(LibraryService.scanner.nextLine());
+            this.setChoosingAction(LibraryService.scanner.nextLine());
         }
 
     }

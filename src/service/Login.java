@@ -1,43 +1,46 @@
 package service;
 
 import dto.Account;
+import dto.Book;
 import dto.Role;
 
+import java.io.IOException;
 
-public class Login {
+
+public class Login implements getNameAndSurname{
     public static final String NEW_ACCOUNT_ADDED = "new account of %s is added";
 
-    private static String yourSurname;
-    private static String yourName;
+    private String yourSurname;
+    private String yourName;
 
-    public static String getYourRole() {
-        return yourRole;
-    }
-
-    public static void setYourRole(String yourRole) {
-        Login.yourRole = yourRole;
+    public String getYourRole() {
+        return this.yourRole;
     }
 
-    private static String yourRole;
-    public static void setYourSurname(String yourSurname) {
-        Login.yourSurname = yourSurname;
+    public void setYourRole(String yourRole) {
+        this.yourRole = yourRole;
     }
-    public static void setYourName(String yourName) {
-        Login.yourName = yourName;
+
+    private String yourRole;
+    public void setYourSurname(String yourSurname) {
+        this.yourSurname = yourSurname;
     }
-    public static String getYourName() {
-        return yourName;
+    public void setYourName(String yourName) {
+        this.yourName = yourName;
     }
-    public static String getYourSurname() {
-        return yourSurname;
+    public String getYourName() {
+        return this.yourName;
     }
-    public static void login() {
+    public String getYourSurname() {
+        return this.yourSurname;
+    }
+    public void login() {
         System.out.println("Enter the name");
-        Login.setYourName(LibraryService.scanner.nextLine());
+        this.setYourName(LibraryService.scanner.nextLine());
         System.out.println("Enter the surname");
-        Login.setYourSurname(LibraryService.scanner.nextLine());
+        this.setYourSurname(LibraryService.scanner.nextLine());
     }
-    public static void addingNewAccount(LibraryService library, String name, String surname, String role) {
+    public void addingNewAccount(LibraryService library, String name, String surname, String role) {
         if (role.equalsIgnoreCase("admin")) {
             library.addAccount(name, surname, Role.ADMIN);
             System.out.println(String.format(NEW_ACCOUNT_ADDED, "admin"));
@@ -47,26 +50,26 @@ public class Login {
         }
     }
 
-    public static void addingAccount(LibraryService library) {
+    public void addingAccount(LibraryService library) {
         System.out.println("Are you admin or not? If you admin, write ADMIN, if not - write USER");
-        Login.setYourRole(LibraryService.scanner.nextLine());
-        while (!Login.getYourRole().equalsIgnoreCase("admin") && !Login.getYourRole().equalsIgnoreCase("user")) {
+        this.setYourRole(LibraryService.scanner.nextLine());
+        while (!this.getYourRole().equalsIgnoreCase("admin") && !this.getYourRole().equalsIgnoreCase("user")) {
             System.out.println("Enter please ADMIN or USER");
-            Login.setYourRole(LibraryService.scanner.nextLine());
+            this.setYourRole(LibraryService.scanner.nextLine());
         }
-        addingNewAccount(library, Login.getYourName(), Login.getYourSurname(), Login.getYourRole());
+        addingNewAccount(library, this.getYourName(), this.getYourSurname(), this.getYourRole());
     }
 
-    public static Account getAccountFromLibrary(LibraryService library, String name, String surname) {
-        return library.getAccounts().stream().filter(account -> name.equals(account.getName()) && surname.equals(account.getSurname())).findFirst().stream().toList().get(0);
-    }
 
-    public static boolean isAccountOfAdmin(LibraryService library, String name, String surname, Role admin) {
+
+    public boolean isAccountOfAdmin(LibraryService library, String name, String surname, Role admin) {
         return library.getAccounts().stream().anyMatch(account -> account.getName().equals(name) && account.getSurname().equals(surname) && account.getRole() == admin);
     }
 
-    public static boolean isAccountNotExist(LibraryService library, String name, String surname) {
+    public boolean isAccountNotExist(LibraryService library, String name, String surname) {
         return library.getAccounts().stream().noneMatch(account -> name.equals(account.getName()) && surname.equals(account.getSurname()));
     }
+
+
 
 }

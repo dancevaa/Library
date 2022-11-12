@@ -43,17 +43,17 @@ public class NewBook extends Login{
     }
     public void readingOfBook(LibraryService library) {
         System.out.println("Which book do you want to read? Enter the name of book");
-        this.setNameOfNewBook(LibraryService.scanner.nextLine());
+        this.setNameOfNewBook(library.scanner.nextLine());
         System.out.println("Enter the author of book");
-        this.setAuthorOfNewBook(LibraryService.scanner.nextLine());
+        this.setAuthorOfNewBook(library.scanner.nextLine());
         library.openBook(this.getNameOfNewBook(), this.getAuthorOfNewBook());
     }
 
     public void deletingOfBook(LibraryService library) throws IOException {
         System.out.println("Enter the name of book");
-        this.setNameOfNewBook(LibraryService.scanner.nextLine());
+        this.setNameOfNewBook(library.scanner.nextLine());
         System.out.println("Enter the author of book");
-        this.setAuthorOfNewBook(LibraryService.scanner.nextLine());
+        this.setAuthorOfNewBook(library.scanner.nextLine());
         if (library.getBooks().stream().anyMatch(book -> this.getNameOfNewBook().equalsIgnoreCase(book.getName()) && this.getAuthorOfNewBook().equalsIgnoreCase(book.getAuthor()))) {
             int indexOfBook = 0;
             for (int i = 0; i < library.getBooks().size(); i++) {
@@ -70,16 +70,16 @@ public class NewBook extends Login{
 
     public void addingNewBook(LibraryService library) throws IOException {
         System.out.println("Enter the name of book");
-        this.setNameOfNewBook(LibraryService.scanner.nextLine());
+        this.setNameOfNewBook(library.scanner.nextLine());
         System.out.println("Enter the author of book");
-        this.setAuthorOfNewBook(LibraryService.scanner.nextLine());
+        this.setAuthorOfNewBook(library.scanner.nextLine());
         System.out.println("Enter the content of book");
-        this.setContentOfNewBook(LibraryService.scanner.nextLine());
+        this.setContentOfNewBook(library.scanner.nextLine());
         System.out.println("Is it electronic or not? Write please YES or NO");
-        this.setIsElectronic(LibraryService.scanner.nextLine());
+        this.setIsElectronic(library.scanner.nextLine());
         while (!this.getIsElectronic().equalsIgnoreCase("yes") && !this.getIsElectronic().equalsIgnoreCase("no")) {
             System.out.println("Write YES or NO");
-            this.setIsElectronic(LibraryService.scanner.nextLine());
+            this.setIsElectronic(library.scanner.nextLine());
         }
         boolean isElectronic;
         if (this.getIsElectronic().equalsIgnoreCase("yes")) {

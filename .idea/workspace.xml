@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="split in different classes and methods and fixed the mistake">
-      <change afterPath="$PROJECT_DIR$/src/service/getNameAndSurname.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="changed static variables and methods to non-static">
+      <change afterPath="$PROJECT_DIR$/src/service/AddingAndDeletingBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
@@ -142,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668180744037</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="changed static variables and methods to non-static">
+      <created>1668247841405</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668247841405</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,6 +171,7 @@
     <MESSAGE value="implementation of new methods" />
     <MESSAGE value="split in different classes and methods" />
     <MESSAGE value="split in different classes and methods and fixed the mistake" />
-    <option name="LAST_COMMIT_MESSAGE" value="split in different classes and methods and fixed the mistake" />
+    <MESSAGE value="changed static variables and methods to non-static" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed static variables and methods to non-static" />
   </component>
 </project>

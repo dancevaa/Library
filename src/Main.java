@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         LibraryService library = new LibraryService();
         boolean isLibraryOpen = true;
-        LibraryService.openLibrary(library, isLibraryOpen);
+        library.openLibrary(library, isLibraryOpen);
     }
 
 

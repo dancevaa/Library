@@ -8,7 +8,7 @@ import java.io.IOException;
 
 
 public class Login implements getNameAndSurname{
-    public static final String NEW_ACCOUNT_ADDED = "new account of %s is added";
+    private static final String NEW_ACCOUNT_ADDED = "new account of %s is added";
 
     private String yourSurname;
     private String yourName;
@@ -34,11 +34,11 @@ public class Login implements getNameAndSurname{
     public String getYourSurname() {
         return this.yourSurname;
     }
-    public void login() {
+    public void login(LibraryService library) {
         System.out.println("Enter the name");
-        this.setYourName(LibraryService.scanner.nextLine());
+        this.setYourName(library.scanner.nextLine());
         System.out.println("Enter the surname");
-        this.setYourSurname(LibraryService.scanner.nextLine());
+        this.setYourSurname(library.scanner.nextLine());
     }
     public void addingNewAccount(LibraryService library, String name, String surname, String role) {
         if (role.equalsIgnoreCase("admin")) {
@@ -52,10 +52,10 @@ public class Login implements getNameAndSurname{
 
     public void addingAccount(LibraryService library) {
         System.out.println("Are you admin or not? If you admin, write ADMIN, if not - write USER");
-        this.setYourRole(LibraryService.scanner.nextLine());
+        this.setYourRole(library.scanner.nextLine());
         while (!this.getYourRole().equalsIgnoreCase("admin") && !this.getYourRole().equalsIgnoreCase("user")) {
             System.out.println("Enter please ADMIN or USER");
-            this.setYourRole(LibraryService.scanner.nextLine());
+            this.setYourRole(library.scanner.nextLine());
         }
         addingNewAccount(library, this.getYourName(), this.getYourSurname(), this.getYourRole());
     }

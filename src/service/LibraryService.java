@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryService {
-    public static Scanner scanner = new Scanner(System.in);
+public class LibraryService implements AddingAndDeletingBooks{
+    public Scanner scanner = new Scanner(System.in);
     public static final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     public static final String CONTENT_FILE = "/content_of_book.txt";
     private List<Book> books;
@@ -41,7 +41,7 @@ public class LibraryService {
         }
     }
 
-    private static void createDirectoryAndFile(Book book) throws IOException {
+    private void createDirectoryAndFile(Book book) throws IOException {
         Path pathOfBook = Path.of(PATH_OF_LIBRARY + book.getName());
         Files.createDirectory(pathOfBook);
         Path pathOfFile = Path.of(PATH_OF_LIBRARY + book.getName() + CONTENT_FILE);
@@ -59,7 +59,7 @@ public class LibraryService {
         }
     }
 
-    private static void deleteDirectoryAndFile(Book book) throws IOException {
+    private void deleteDirectoryAndFile(Book book) throws IOException {
         Path pathOfFile = Path.of(PATH_OF_LIBRARY + book.getName() + CONTENT_FILE);
         Files.delete(pathOfFile);
         Path pathOfBook = Path.of(PATH_OF_LIBRARY + book.getName());
@@ -77,9 +77,9 @@ public class LibraryService {
         return library.getAccounts().stream().filter(account -> name.equals(account.getName()) && surname.equals(account.getSurname())).findFirst().stream().toList().get(0);
     }
 
-    public static void openLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
+    public void openLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
         do {Login newLogin = new Login();
-            newLogin.login();
+            newLogin.login(library);
             if (newLogin.isAccountNotExist(library, newLogin.getYourName(), newLogin.getYourSurname())) {
                 newLogin.addingAccount(library);
             }
@@ -88,7 +88,7 @@ public class LibraryService {
                 Menu menu = new Menu();
                 NewBook newBook = new NewBook();
                 if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.ADMIN)) {
-                    menu.choosingAction();
+                    menu.choosingAction(library);
                     if (menu.getChoosingAction().equalsIgnoreCase("add")) {
                         newBook.addingNewBook(library);
                     } else if (menu.getChoosingAction().equalsIgnoreCase("delete")) {
@@ -100,7 +100,7 @@ public class LibraryService {
                 } else if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.USER)) {
                     newBook.readingOfBook(library);
                 }
-                doSomething = menu.isDoSomething(doSomething);
+                doSomething = menu.isDoSomething(doSomething, library);
             }
             while (doSomething == true);
         }

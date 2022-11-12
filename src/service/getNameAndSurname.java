@@ -1,7 +1,7 @@
 package service;
 
 public interface getNameAndSurname {
-    String getYourName();
-    String getYourSurname();
+    String getName();
+    String getSurname();
 
 }

@@ -1,17 +1,25 @@
 package dto;
 
 public class Book {
+    private static final String YES = "yes";
+
     private String name;
     private String author;
     private String content;
     private boolean isElectronic;
-
 
     public Book (String name, String author, String content, boolean isElectronic){
         this.name = name;
         this.author = author;
         this.content = content;
         this.isElectronic = isElectronic;
+    }
+
+    public Book (String name, String author, String content, String isElectronic){
+        this.name = name;
+        this.author = author;
+        this.content = content;
+        this.isElectronic = YES.equalsIgnoreCase(isElectronic);
     }
 
     @Override

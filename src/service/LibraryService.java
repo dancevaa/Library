@@ -11,18 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryService implements AddingAndDeletingBooks{
-    public Scanner scanner = new Scanner(System.in);
+public class LibraryService {
+
+    private final Login login;
+
     public static final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     public static final String CONTENT_FILE = "/content_of_book.txt";
+
     private List<Book> books;
     private List<Account> accounts;
+    private Scanner scanner;
 
-    public LibraryService() throws IOException {
+    public LibraryService(Login login) throws IOException {
+        this.login = login;
         books = new ArrayList<>();
         accounts = new ArrayList<>();
+        scanner = new Scanner(System.in);
         Files.createDirectory(Path.of(PATH_OF_LIBRARY));
     }
+
     public List<Book> getBooks() {
         return books;
     }
@@ -31,14 +38,16 @@ public class LibraryService implements AddingAndDeletingBooks{
         return accounts;
     }
 
-    public void addBook(Book book, Account account) throws IOException {
-        if (account.getRole() == Role.ADMIN) {
-            books.add(book);
-            createDirectoryAndFile(book);
-            System.out.printf("Book %s is added", book);
-        } else {
-            System.out.println("Access denied");
-        }
+    public void addBook() {
+        System.out.println("Enter the name of book");
+        String bookName = scanner.nextLine();
+        System.out.println("Enter the author of book");
+        String bookAuthor = scanner.nextLine();
+        System.out.println("Enter the content of book");
+        String bookContent = scanner.nextLine();
+        System.out.println("Is it electronic or not? Write please YES or NO");
+        String bookElectronic = scanner.nextLine();
+        books.add(new Book(bookName, bookAuthor, bookContent, bookElectronic));
     }
 
     private void createDirectoryAndFile(Book book) throws IOException {
@@ -78,26 +87,20 @@ public class LibraryService implements AddingAndDeletingBooks{
     }
 
     public void openLibrary(LibraryService library, boolean isLibraryOpen) throws IOException {
-        do {Login newLogin = new Login();
-            newLogin.login(library);
-            if (newLogin.isAccountNotExist(library, newLogin.getYourName(), newLogin.getYourSurname())) {
-                newLogin.addingAccount(library);
-            }
+        do {
+            Account account = login.login();
+
             boolean doSomething = true;
             do {
                 Menu menu = new Menu();
                 NewBook newBook = new NewBook();
-                if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.ADMIN)) {
-                    menu.choosingAction(library);
-                    if (menu.getChoosingAction().equalsIgnoreCase("add")) {
-                        newBook.addingNewBook(library);
-                    } else if (menu.getChoosingAction().equalsIgnoreCase("delete")) {
-                        newBook.deletingOfBook(library);
-                    } else if (menu.getChoosingAction().equalsIgnoreCase("read")) {
-                        newBook.readingOfBook(library);
+                if (Role.ADMIN.equals(account.getRole())) {
+                    switch (menu.choosingAction()) {
+                        case ADD -> addBook();
+                        case READ -> newBook.readingOfBook(library);
+                        case DELETE -> newBook.deletingOfBook(library);
                     }
-
-                } else if (newLogin.isAccountOfAdmin(library, newLogin.getYourName(), newLogin.getYourSurname(), Role.USER)) {
+                } else {
                     newBook.readingOfBook(library);
                 }
                 doSomething = menu.isDoSomething(doSomething, library);

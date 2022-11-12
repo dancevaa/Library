@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="changed static variables and methods to non-static">
-      <change afterPath="$PROJECT_DIR$/src/service/AddingAndDeletingBooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dto/Action.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/NewBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/NewBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/getNameAndSurname.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/getNameAndSurname.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668247841405</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="changed static variables and methods to non-static">
+      <created>1668251906424</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668251906424</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Login implements getNameAndSurname {
+public class Login {
     private static final String NEW_ACCOUNT_ADDED_TEMPATE = "new account of %s is added";
 
     private final List<Account> accountList;

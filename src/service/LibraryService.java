@@ -58,13 +58,20 @@ public class LibraryService {
         Files.writeString(pathOfFile, book.getContent());
     }
 
-    public void deleteBook(Book book, Account account) throws IOException {
-        if (account.getRole() == Role.ADMIN) {
-            books.remove(book);
-            deleteDirectoryAndFile(book);
-            System.out.printf("Book %s is removed", book);
+    public void deleteBook() {
+        System.out.println("Enter the name of book");
+        String bookName = scanner.nextLine();
+        System.out.println("Enter the author of book");
+        String bookAuthor = scanner.nextLine();
+        if(books.stream().anyMatch(book -> book.getName().equals(bookName) && book.getAuthor().equals(bookAuthor))){
+            for (int i = 0; i < books.size(); i++) {
+                if (books.get(i).getName().equals(bookName) && books.get(i).getAuthor().equals(bookAuthor)) {
+                    books.remove(i);
+                }
+            }
+            System.out.println("Book is deleted");
         } else {
-            System.out.println("Access denied");
+            System.out.println("There is no such book");
         }
     }
 
@@ -75,8 +82,12 @@ public class LibraryService {
         Files.delete(pathOfBook);
     }
 
-    public void openBook(String name, String author) {
-        books.stream().filter(book -> book.getName().equals(name) && book.getAuthor().equals(author)).findFirst().ifPresentOrElse(System.out::println, () -> System.out.println("Book is not found"));
+    public void readBook() {
+        System.out.println("Enter the name of book");
+        String bookName = scanner.nextLine();
+        System.out.println("Enter the author of book");
+        String bookAuthor = scanner.nextLine();
+        books.stream().filter(book -> book.getName().equals(bookName) && book.getAuthor().equals(bookAuthor)).findFirst().ifPresentOrElse(System.out::println, () -> System.out.println("Book is not found"));
     }
 
     public void addAccount(String name, String surname, Role role){
@@ -93,15 +104,14 @@ public class LibraryService {
             boolean doSomething = true;
             do {
                 Menu menu = new Menu();
-                NewBook newBook = new NewBook();
                 if (Role.ADMIN.equals(account.getRole())) {
                     switch (menu.choosingAction()) {
                         case ADD -> addBook();
-                        case READ -> newBook.readingOfBook(library);
-                        case DELETE -> newBook.deletingOfBook(library);
+                        case READ -> readBook();
+                        case DELETE -> deleteBook();
                     }
                 } else {
-                    newBook.readingOfBook(library);
+                    readBook();
                 }
                 doSomething = menu.isDoSomething(doSomething, library);
             }

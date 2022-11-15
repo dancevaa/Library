@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="changed static variables and methods to non-static">
-      <change afterPath="$PROJECT_DIR$/src/dto/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dto/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dto/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Role.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="refactoring">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/AddingAndDeletingBooks.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/NewBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/NewBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/getNameAndSurname.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/getNameAndSurname.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/NewBook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/getNameAndSurname.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668251906424</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactoring">
+      <created>1668260102381</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668260102381</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,7 +177,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <MESSAGE value="refactoring" />
     <MESSAGE value="implementation of main method" />
     <MESSAGE value="implementation of adding books to file and delete them from file" />
     <MESSAGE value="implementation of adding books to file and delete them from file, get account from library, is account of admin, is account not exist, adding new account" />
@@ -181,6 +184,7 @@
     <MESSAGE value="split in different classes and methods" />
     <MESSAGE value="split in different classes and methods and fixed the mistake" />
     <MESSAGE value="changed static variables and methods to non-static" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed static variables and methods to non-static" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
 </project>

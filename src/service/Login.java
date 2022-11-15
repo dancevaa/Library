@@ -40,7 +40,7 @@ public class Login {
             System.out.println("Enter please ADMIN or USER");
             this.setRole(scanner.nextLine());
         }
-        return new Account(name, surname, Role.findRole(role));
+        return new Account(this.name, this.surname, Role.findRole(this.role.toUpperCase()));
     }
 
     public boolean isAccountOfAdmin(LibraryService library, String name, String surname, Role admin) {

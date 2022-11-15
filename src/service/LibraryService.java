@@ -47,7 +47,12 @@ public class LibraryService {
         String bookContent = scanner.nextLine();
         System.out.println("Is it electronic or not? Write please YES or NO");
         String bookElectronic = scanner.nextLine();
+        while (!bookElectronic.equalsIgnoreCase("yes") && !bookElectronic.equalsIgnoreCase("no")){
+            System.out.println("Write Yes or NO");
+            bookElectronic = scanner.nextLine();
+        }
         books.add(new Book(bookName, bookAuthor, bookContent, bookElectronic));
+        System.out.println("Book is added");
     }
 
     private void createDirectoryAndFile(Book book) throws IOException {

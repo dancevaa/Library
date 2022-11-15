@@ -24,7 +24,7 @@ public class Menu {
         this.choosingAction = choosingAction;
     }
 
-    public boolean isDoSomething(boolean doSomething, LibraryService library) {
+    public boolean isDoSomething(boolean doSomething) {
         System.out.println(" ");
         System.out.println("Do you want to do something else? Write YES or NO");
         this.setChoosingAction(scanner.nextLine());
@@ -36,7 +36,14 @@ public class Menu {
             doSomething = true;
         } else if (this.getChoosingAction().equalsIgnoreCase("no")) {
             doSomething = false;
-            System.out.println("The next one");
+            System.out.println("Do you want to close library");
+            this.setChoosingAction(scanner.nextLine());
+            if(getChoosingAction().equalsIgnoreCase("yes")){
+                LibraryService.setLibraryOpen(false);
+            }
+            else {
+                System.out.println("The next one");
+            }
         }
         return doSomething;
     }

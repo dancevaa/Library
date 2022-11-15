@@ -1,8 +1,9 @@
 package dto;
 
-public class Book {
-    private static final String YES = "yes";
+import java.io.Serializable;
 
+public class Book implements Serializable {
+    private static final String YES = "yes";
     private String name;
     private String author;
     private String content;

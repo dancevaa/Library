@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class Login {
     private static final String NEW_ACCOUNT_ADDED_TEMPATE = "new account of %s is added";
 
-    private final List<Account> accountList;
+
+    private List<Account> accountList;
 
     private final Scanner scanner;
 
@@ -40,19 +41,20 @@ public class Login {
             System.out.println("Enter please ADMIN or USER");
             this.setRole(scanner.nextLine());
         }
+        accountList.add(new Account(name, surname, Role.findRole(role.toUpperCase())));
+        System.out.println(String.format(NEW_ACCOUNT_ADDED_TEMPATE, this.getRole()));
         return new Account(this.name, this.surname, Role.findRole(this.role.toUpperCase()));
     }
 
-    public boolean isAccountOfAdmin(LibraryService library, String name, String surname, Role admin) {
-        return library.getAccounts().stream()
-                .anyMatch(account -> account.getName().equals(name) && account.getSurname().equals(surname) && account.getRole() == admin);
-    }
-
     private Account getExistedAccountOrAddNewAccount(String name, String surname) {
-        return accountList.stream()
-                .filter(account -> name.equals(account.getName()) && surname.equals(account.getSurname()))
-                .findFirst()
-                .orElse(addingAccount());
+        if(accountList.stream().anyMatch(account -> name.equals(account.getName()) && surname.equals(account.getSurname()))){
+            return accountList.stream()
+                    .filter(account -> name.equals(account.getName()) && surname.equals(account.getSurname()))
+                    .findFirst().get();
+        }
+        else {
+            return addingAccount();
+        }
     }
 
     public String getRole() {
@@ -77,6 +79,14 @@ public class Login {
 
     public String getSurname() {
         return this.surname;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
 }

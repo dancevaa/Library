@@ -10,9 +10,9 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Login login = new Login();
         LibraryService library = new LibraryService(login);
-        library.openLibrary();
+        library.openLibrary(login);
         SavedLibrary savedLibrary = new SavedLibrary(login.getAccountList(), library.getBooks());
-        FileOutputStream outputStream = new FileOutputStream(LibraryService.PATH_OF_LIBRARY + "save.ser");
+        FileOutputStream outputStream = new FileOutputStream("/Users/annann/Desktop/Library/save.ser");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream.writeObject(savedLibrary);
         objectOutputStream.close();

@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/src/service/SavedLibrary.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="fixed mistakes and added serialization">
+      <change afterPath="$PROJECT_DIR$/src/service/LibraryServiceInt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/LoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/MenuService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dto/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -177,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668521668211</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fixed mistakes and added serialization">
+      <created>1668553490263</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668553490263</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,6 +210,7 @@
     <MESSAGE value="split in different classes and methods and fixed the mistake" />
     <MESSAGE value="changed static variables and methods to non-static" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="fixed mistakes and added serialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed mistakes and added serialization" />
   </component>
 </project>

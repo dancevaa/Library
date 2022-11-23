@@ -10,13 +10,14 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryService implements LibraryServiceInt{
+public class LibraryService implements LibraryServiceInt {
     private static List<Book> books;
     private final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     private final String CONTENT_FILE = "/content_of_book.txt";
     private final Scanner scanner = new Scanner(System.in);
-    public void addBook(){
-        try{
+
+    public void addBook() {
+        try {
             System.out.println("Enter the name of book");
             String bookName = scanner.nextLine();
             System.out.println("Enter the content of book");
@@ -24,8 +25,7 @@ public class LibraryService implements LibraryServiceInt{
             books.add(new Book(bookName, bookContent));
             System.out.println("Book is added");
             createDirectoryAndFile(bookName, bookContent);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Book is already exists");
         }
 
@@ -35,7 +35,7 @@ public class LibraryService implements LibraryServiceInt{
     public void deleteBook() throws IOException {
         System.out.println("Enter the name of book");
         String bookName = scanner.nextLine();
-        if(books.stream().anyMatch(book -> book.getName().equals(bookName))){
+        if (books.stream().anyMatch(book -> book.getName().equals(bookName))) {
             for (int i = 0; i < books.size(); i++) {
                 if (books.get(i).getName().equals(bookName)) {
                     books.remove(i);
@@ -49,15 +49,14 @@ public class LibraryService implements LibraryServiceInt{
     }
 
     @Override
-    public void readBook(){
+    public void readBook() {
         try {
             System.out.println("Enter the name of book");
             String bookName = scanner.nextLine();
             BufferedReader buff = new BufferedReader(new FileReader(PATH_OF_LIBRARY + bookName + CONTENT_FILE));
             System.out.println(buff.readLine());
             buff.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Book is not found");
         }
     }
@@ -78,12 +77,12 @@ public class LibraryService implements LibraryServiceInt{
         Path pathOfBook = Path.of(PATH_OF_LIBRARY + name);
         Files.delete(pathOfBook);
     }
+
     public static List<Book> getBooks() {
         return books;
     }
+
     public static void setBooks(List<Book> books) {
         LibraryService.books = books;
     }
-
-
 }

@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="added menu service, LibraryServiceInt, loginservice interfaces">
-      <change afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/Storage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/StorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="implemented methods from interfaces">
       <change beforePath="$PROJECT_DIR$/src/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LibraryServiceInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LibraryServiceInt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/SavedLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/SavedLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/StorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/StorageService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669068053359</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="implemented methods from interfaces">
+      <created>1669212584038</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1669212584038</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,6 +223,7 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="fixed mistakes and added serialization" />
     <MESSAGE value="added menu service, LibraryServiceInt, loginservice interfaces" />
-    <option name="LAST_COMMIT_MESSAGE" value="added menu service, LibraryServiceInt, loginservice interfaces" />
+    <MESSAGE value="implemented methods from interfaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented methods from interfaces" />
   </component>
 </project>

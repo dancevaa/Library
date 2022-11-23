@@ -5,7 +5,7 @@ import dto.Action;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Menu implements MenuService{
+public class Menu implements MenuService {
     private final Scanner scanner = new Scanner(System.in);
 
     public Action choosingAction() {
@@ -32,10 +32,9 @@ public class Menu implements MenuService{
             doSomething = false;
             System.out.println("Do you want to close library");
             choosingAction = scanner.nextLine();
-            if(choosingAction.equalsIgnoreCase("yes")){
+            if (choosingAction.equalsIgnoreCase("yes")) {
                 Storage.setLibraryOpen(false);
-            }
-            else {
+            } else {
                 System.out.println("The next one");
             }
         }

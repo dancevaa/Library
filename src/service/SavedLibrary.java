@@ -15,22 +15,11 @@ public class SavedLibrary implements Serializable {
         this.savedAccounts = savedAccounts;
         this.savedBooks = savedBooks;
     }
-
     public List<Account> getSavedAccounts() {
         return savedAccounts;
     }
-
-    public void setSavedAccounts(List<Account> savedAccounts) {
-        this.savedAccounts = savedAccounts;
-    }
-
     public List<Book> getSavedBooks() {
         return savedBooks;
     }
-
-    public void setSavedBooks(List<Book> savedBooks) {
-        this.savedBooks = savedBooks;
-    }
-
 
 }

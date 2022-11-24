@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Login implements LoginService{
+public class LoginServiceImpl implements LoginService{
     private final String NEW_ACCOUNT_ADDED_TEMPATE = "new account of %s is added";
     private static List<Account> accountList;
     private final Scanner scanner;
     private String password;
 
-    public Login() {
+    public LoginServiceImpl() {
         this.scanner = new Scanner(System.in);
         this.accountList = new ArrayList<>();
     }
@@ -60,7 +60,7 @@ public class Login implements LoginService{
     }
 
     public static void setAccountList(List<Account> accountList) {
-        Login.accountList = accountList;
+        LoginServiceImpl.accountList = accountList;
     }
 
 

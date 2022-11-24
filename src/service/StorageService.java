@@ -1,11 +1,11 @@
 package service;
+import Exception.*;
 
-import java.io.IOException;
 
 public interface StorageService {
-    void openLibrary(Login login, LibraryService libraryService, Menu menu) throws IOException;
+    void openLibrary(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl, MenuServiceImpl menuServiceImpl) throws NoSuchDirectoryOrFile;
 
-    void openOrCreateLibrary(Login login) throws IOException, ClassNotFoundException;
+    void openOrCreateLibrary(LoginServiceImpl loginServiceImpl) throws FileIsAlreadyExist, NoSuchDirectoryOrFile;
 
-    void saving(Login login, LibraryService libraryService) throws IOException;
+    void saving(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl) throws NoSuchDirectoryOrFile;
 }

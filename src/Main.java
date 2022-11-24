@@ -1,18 +1,18 @@
-import service.LibraryService;
-import service.Login;
-import service.Menu;
-import service.Storage;
+import service.LibraryServiceImpl;
+import service.LoginServiceImpl;
+import service.MenuServiceImpl;
+import service.StorageServiceImpl;
 
-import java.io.IOException;
+import Exception.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Login login = new Login();
-        Menu menu = new Menu();
-        LibraryService library = new LibraryService();
-        Storage storage = new Storage(login);
-        storage.openLibrary(login, library, menu);
-        storage.saving(login, library);
+    public static void main(String[] args) throws NoSuchDirectoryOrFile, FileIsAlreadyExist {
+        LoginServiceImpl loginServiceImpl = new LoginServiceImpl();
+        MenuServiceImpl menuServiceImpl = new MenuServiceImpl();
+        LibraryServiceImpl library = new LibraryServiceImpl();
+        StorageServiceImpl storageServiceImpl = new StorageServiceImpl(loginServiceImpl);
+        storageServiceImpl.openLibrary(loginServiceImpl, library, menuServiceImpl);
+        storageServiceImpl.saving(loginServiceImpl, library);
     }
 }
 

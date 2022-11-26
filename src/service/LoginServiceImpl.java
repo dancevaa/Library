@@ -18,6 +18,7 @@ public class LoginServiceImpl implements LoginService{
         this.scanner = new Scanner(System.in);
         this.accountList = new ArrayList<>();
     }
+    @Override
     public void logIn(String name) {
         System.out.println("Enter the password");
         this.password = scanner.nextLine();
@@ -26,11 +27,13 @@ public class LoginServiceImpl implements LoginService{
             this.password = scanner.nextLine();
         }
     }
+    @Override
     public Account entering() {
         System.out.println("Enter the name");
         String name = scanner.nextLine();
         return logInOrLogUp(name);
     }
+    @Override
     public Account logUp(String name) {
         System.out.println("Enter the password");
         String password = scanner.nextLine();
@@ -45,6 +48,7 @@ public class LoginServiceImpl implements LoginService{
         return new Account(name, password, Role.findRole(role.toUpperCase()));
     }
 
+    @Override
     public Account logInOrLogUp(String name) {
         if (accountList.stream().anyMatch(account -> name.equals(account.getName()))) {
             logIn(name);

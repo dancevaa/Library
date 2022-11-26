@@ -1,5 +1,5 @@
 package service;
-import Exception.*;
+import exception.*;
 
 
 public interface StorageService {

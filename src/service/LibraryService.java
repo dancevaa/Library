@@ -1,6 +1,6 @@
 package service;
 
-import Exception.*;
+import exception.*;
 
 public interface LibraryService {
     void addBook();

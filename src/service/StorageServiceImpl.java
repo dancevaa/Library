@@ -2,23 +2,22 @@ package service;
 
 import dto.Account;
 import dto.Role;
-import Exception.*;
+import exception.*;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class StorageServiceImpl implements Serializable, StorageService {
+public class StorageServiceImpl implements StorageService {
     private final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
-
-    private static final long serialVersionUID = 1L;
     private static boolean isLibraryOpen = true;
 
     public StorageServiceImpl(LoginServiceImpl loginServiceImpl) throws NoSuchDirectoryOrFile, FileIsAlreadyExist {
         openOrCreateLibrary(loginServiceImpl);
     }
 
+    @Override
     public void openLibrary(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl, MenuServiceImpl menuServiceImpl) throws NoSuchDirectoryOrFile {
         do {
             Account account = loginServiceImpl.entering();
@@ -40,6 +39,7 @@ public class StorageServiceImpl implements Serializable, StorageService {
         while (isLibraryOpen);
     }
 
+    @Override
     public void openOrCreateLibrary(LoginServiceImpl loginServiceImpl) throws FileIsAlreadyExist, NoSuchDirectoryOrFile{
         if (!Files.exists(Path.of(PATH_OF_LIBRARY))) {
             try {
@@ -66,6 +66,7 @@ public class StorageServiceImpl implements Serializable, StorageService {
         }
     }
 
+    @Override
     public void saving(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl) throws NoSuchDirectoryOrFile {
         String path = "/Users/annann/Desktop/Library/saved.JSON";
         try {

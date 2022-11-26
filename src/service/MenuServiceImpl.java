@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class MenuServiceImpl implements MenuService {
     private final Scanner scanner = new Scanner(System.in);
 
+    @Override
     public Action choosingAction() {
         System.out.println("Do you want to add book, delete or read? Write please ADD, DELETE, or READ");
         String action = scanner.nextLine();
@@ -18,6 +19,7 @@ public class MenuServiceImpl implements MenuService {
                 .orElse(Action.READ);
     }
 
+    @Override
     public boolean isDoSomething(boolean doSomething) {
         System.out.println(" ");
         System.out.println("Do you want to do something else? Write YES or NO");

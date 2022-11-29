@@ -1,16 +1,17 @@
 package service;
 
 import dto.Action;
+import lombok.extern.log4j.Log4j;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
+@Log4j
 public class MenuServiceImpl implements MenuService {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public Action choosingAction() {
-        System.out.println("Do you want to add book, delete or read? Write please ADD, DELETE, or READ");
+        log.info("Do you want to add book, delete or read? Write please ADD, DELETE, or READ");
         String action = scanner.nextLine();
 
         return Arrays.stream(Action.values())
@@ -21,23 +22,23 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public boolean isDoSomething(boolean doSomething) {
-        System.out.println(" ");
-        System.out.println("Do you want to do something else? Write YES or NO");
+        log.info(" ");
+        log.info("Do you want to do something else? Write YES or NO");
         String choosingAction = scanner.nextLine();
         while (!choosingAction.equalsIgnoreCase("yes") && !choosingAction.equalsIgnoreCase("no")) {
-            System.out.println("Write YES or NO");
+            log.info("Write YES or NO");
             choosingAction = scanner.nextLine();
         }
         if (choosingAction.equalsIgnoreCase("yes")) {
             doSomething = true;
         } else if (choosingAction.equalsIgnoreCase("no")) {
             doSomething = false;
-            System.out.println("Do you want to close library");
+            log.info("Do you want to close library");
             choosingAction = scanner.nextLine();
             if (choosingAction.equalsIgnoreCase("yes")) {
                 StorageServiceImpl.setLibraryOpen(false);
             } else {
-                System.out.println("The next one");
+                log.info("The next one");
             }
         }
         return doSomething;

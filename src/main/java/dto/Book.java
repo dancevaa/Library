@@ -1,38 +1,12 @@
 package dto;
 
 import java.io.Serializable;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+@Data
+@AllArgsConstructor
 public class Book implements Serializable {
     private String name;
     private String content;
-
-    public Book (String name, String content){
-        this.name = name;
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                '}';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
 }

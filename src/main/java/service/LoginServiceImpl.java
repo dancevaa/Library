@@ -2,12 +2,13 @@ package service;
 
 import dto.Account;
 import dto.Role;
+import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+@Log4j
 public class LoginServiceImpl implements LoginService{
     private final String NEW_ACCOUNT_ADDED_TEMPATE = "new account of %s is added";
     private static List<Account> accountList;
@@ -20,31 +21,31 @@ public class LoginServiceImpl implements LoginService{
     }
     @Override
     public void logIn(String name) {
-        System.out.println("Enter the password");
+        log.info("Enter the password");
         this.password = scanner.nextLine();
         while (!accountList.stream().anyMatch(account -> name.equals(account.getName()) && this.password.equals(account.getPassword()))){
-            System.out.println("Invalid password! Try again");
+            log.info("Invalid password! Try again");
             this.password = scanner.nextLine();
         }
     }
     @Override
     public Account entering() {
-        System.out.println("Enter the name");
+        log.info("Enter the name");
         String name = scanner.nextLine();
         return logInOrLogUp(name);
     }
     @Override
     public Account logUp(String name) {
-        System.out.println("Enter the password");
+        log.info("Enter the password");
         String password = scanner.nextLine();
-        System.out.println("Are you admin or not? If you admin, write ADMIN, if not - write USER");
+        log.info("Are you admin or not? If you admin, write ADMIN, if not - write USER");
         String role = scanner.nextLine();
         while (!role.equalsIgnoreCase(Role.ADMIN.getRoleName()) && !role.equalsIgnoreCase(Role.USER.getRoleName())) {
-            System.out.println("Enter please ADMIN or USER");
+            log.info("Enter please ADMIN or USER");
             role = scanner.nextLine();
         }
         accountList.add(new Account(name, password, Role.findRole(role.toUpperCase())));
-        System.out.println(String.format(NEW_ACCOUNT_ADDED_TEMPATE, role));
+        log.info(String.format(NEW_ACCOUNT_ADDED_TEMPATE, role));
         return new Account(name, password, Role.findRole(role.toUpperCase()));
     }
 

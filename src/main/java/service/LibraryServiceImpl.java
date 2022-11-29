@@ -2,6 +2,8 @@ package service;
 
 import dto.Book;
 import exception.*;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +12,10 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
+
+@Log4j
 public class LibraryServiceImpl implements LibraryService {
+
     private static List<Book> books;
     private final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
     private final String CONTENT_FILE = "/content_of_book.txt";
@@ -19,22 +24,22 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void addBook() {
         try {
-            System.out.println("Enter the name of book");
+            log.info("Enter the name of book");
             String bookName = scanner.nextLine();
-            System.out.println("Enter the content of book");
+            log.info("Enter the content of book");
             String bookContent = scanner.nextLine();
             books.add(new Book(bookName, bookContent));
-            System.out.println("Book is added");
+            log.info("Book is added");
             createDirectoryAndFile(bookName, bookContent);
         } catch (Exception e) {
-            System.out.println("Book is already exists");
+            log.info("Book is already exists");
         }
 
     }
 
     @Override
     public void deleteBook() throws NoSuchDirectoryOrFile {
-        System.out.println("Enter the name of book");
+        log.info("Enter the name of book");
         String bookName = scanner.nextLine();
         if (books.stream().anyMatch(book -> book.getName().equals(bookName))) {
             for (int i = 0; i < books.size(); i++) {
@@ -42,9 +47,9 @@ public class LibraryServiceImpl implements LibraryService {
                     books.remove(i);
                 }
             }
-            System.out.println("Book is deleted");
+            log.info("Book is deleted");
         } else {
-            System.out.println("There is no such book");
+            log.info("There is no such book");
         }
         deleteDirectoryAndFile(bookName);
     }
@@ -52,13 +57,13 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void readBook() {
         try {
-            System.out.println("Enter the name of book");
+            log.info("Enter the name of book");
             String bookName = scanner.nextLine();
             BufferedReader buff = new BufferedReader(new FileReader(PATH_OF_LIBRARY + bookName + CONTENT_FILE));
-            System.out.println(buff.readLine());
+            log.info(buff.readLine());
             buff.close();
         } catch (Exception e) {
-            System.out.println("Book is not found");
+            log.info("Book is not found");
         }
     }
 

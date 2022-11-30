@@ -1,12 +1,13 @@
 package service;
 
 import dto.Book;
-import exception.*;
-import lombok.extern.slf4j.Slf4j;
+import exception.FileIsAlreadyExist;
+import exception.NoSuchDirectoryOrFile;
 import lombok.extern.log4j.Log4j;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -76,7 +77,7 @@ public class LibraryServiceImpl implements LibraryService {
             Files.createFile(pathOfFile);
             Files.writeString(pathOfFile, content);
         }
-        catch (Exception e){
+        catch (IOException e){
             throw new FileIsAlreadyExist(pathOfBook.toString());
         }
     }
@@ -89,7 +90,7 @@ public class LibraryServiceImpl implements LibraryService {
             Files.delete(pathOfFile);
             Files.delete(pathOfBook);
         }
-        catch (Exception e){
+        catch (IOException e){
             throw new NoSuchDirectoryOrFile(pathOfFile.toString());
         }
 

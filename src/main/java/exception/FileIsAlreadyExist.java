@@ -1,11 +1,13 @@
 package exception;
 
-public class FileIsAlreadyExist extends Exception{
+import java.io.IOException;
 
-    public FileIsAlreadyExist() {
-    }
+public class FileIsAlreadyExist extends IOException {
+
+    private static final String EXCEPTION_MESSAGE = "File is already exist by path [%s]";
+
     public FileIsAlreadyExist(String message) {
-        super("File is already exist by path " + message);
+        super(EXCEPTION_MESSAGE.formatted(message));
     }
 
 }

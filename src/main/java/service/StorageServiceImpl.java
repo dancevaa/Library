@@ -2,8 +2,8 @@ package service;
 
 import dto.Account;
 import dto.Role;
-import exception.*;
-
+import exception.FileIsAlreadyExist;
+import exception.NoSuchDirectoryOrFile;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -48,7 +48,7 @@ public class StorageServiceImpl implements StorageService {
                 Files.createDirectory(Path.of(PATH_OF_LIBRARY));
                 Files.createFile(Path.of(PATH_OF_LIBRARY + "saved.JSON"));
             }
-            catch (Exception e){
+            catch (IOException e){
                 throw new FileIsAlreadyExist(PATH_OF_LIBRARY);
             }
             LibraryServiceImpl.setBooks(new ArrayList<>());
@@ -61,7 +61,7 @@ public class StorageServiceImpl implements StorageService {
                 LibraryServiceImpl.setBooks(savedLibrary.getSavedBooks());
                 loginServiceImpl.setAccountList(savedLibrary.getSavedAccounts());
             }
-            catch (Exception e){
+            catch (IOException e){
                 throw new NoSuchDirectoryOrFile(PATH_OF_LIBRARY + "saved.JSON");
             }
 
@@ -77,7 +77,7 @@ public class StorageServiceImpl implements StorageService {
             objectOutputStream.writeObject(new SavedLibrary(loginServiceImpl.getAccountList(), libraryServiceImpl.getBooks()));
             objectOutputStream.close();
         }
-        catch (Exception e){
+        catch (IOException e){
             throw new NoSuchDirectoryOrFile(path);
         }
 

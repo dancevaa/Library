@@ -3,7 +3,8 @@ package dto;
 public enum Action {
     READ("read"),
     ADD("add"),
-    DELETE("delete");
+    DELETE("delete"),
+    EXIT("exit");
 
     private final String actionName;
 
@@ -15,7 +16,7 @@ public enum Action {
         return actionName;
     }
 
-    public static Action findAction(String action) {
-        return Action.valueOf(action);
+    public static Action findAction(final String action) {
+        return Action.valueOf(action.toLowerCase());
     }
 }

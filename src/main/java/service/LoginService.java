@@ -3,9 +3,7 @@ package service;
 import dto.Account;
 
 public interface LoginService {
-    void logIn(String name);
-
-    Account entering();
+    Account logIn(String name);
 
     Account logUp(String name);
 

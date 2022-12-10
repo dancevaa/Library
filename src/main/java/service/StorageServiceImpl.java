@@ -1,90 +1,63 @@
 package service;
 
-import dto.Account;
-import dto.Role;
-import exception.*;
+import exception.BookAlreadyExistsException;
+import exception.NoSuchBookException;
+import exception.NoSuchDirectoryException;
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
-
+@Slf4j
+@AllArgsConstructor
 public class StorageServiceImpl implements StorageService {
-    private final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
-    private static boolean isLibraryOpen = true;
-
-    public StorageServiceImpl(LoginServiceImpl loginServiceImpl) throws NoSuchDirectoryOrFile, FileIsAlreadyExist {
-        openOrCreateLibrary(loginServiceImpl);
-    }
+    private final String pathToLibrary;
 
     @Override
-    public void openLibrary(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl, MenuServiceImpl menuServiceImpl) throws NoSuchDirectoryOrFile {
-        do {
-            Account account = loginServiceImpl.entering();
-            boolean doSomething = true;
-            do {
-                if (Role.ADMIN.equals(account.getRole())) {
-                    switch (menuServiceImpl.choosingAction()) {
-                        case ADD -> libraryServiceImpl.addBook();
-                        case READ -> libraryServiceImpl.readBook();
-                        case DELETE -> libraryServiceImpl.deleteBook();
-                    }
-                } else {
-                    libraryServiceImpl.readBook();
-                }
-                doSomething = menuServiceImpl.isDoSomething(doSomething);
-            }
-            while (doSomething);
-        }
-        while (isLibraryOpen);
-    }
+    public String getBook(final String bookName) {
+        final Optional<String[]> allBooks = Optional.ofNullable(new File(pathToLibrary).list());
+        if (allBooks.isPresent()) {
+            final String requiredBook = Arrays.stream(allBooks.get())
+                    .filter(bookName::equals)
+                    .findFirst()
+                    .orElseThrow(() -> new NoSuchBookException(bookName));
 
-    @Override
-    public void openOrCreateLibrary(LoginServiceImpl loginServiceImpl) throws FileIsAlreadyExist, NoSuchDirectoryOrFile{
-        if (!Files.exists(Path.of(PATH_OF_LIBRARY))) {
-            try {
-                Files.createDirectory(Path.of(PATH_OF_LIBRARY));
-                Files.createFile(Path.of(PATH_OF_LIBRARY + "saved.JSON"));
-            }
-            catch (Exception e){
-                throw new FileIsAlreadyExist(PATH_OF_LIBRARY);
-            }
-            LibraryServiceImpl.setBooks(new ArrayList<>());
-            loginServiceImpl.setAccountList(new ArrayList<>());
+            return getBookContent(pathToLibrary + requiredBook);
         } else {
-            try {
-                FileInputStream fileInputStream = new FileInputStream(PATH_OF_LIBRARY + "saved.JSON");
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                SavedLibrary savedLibrary = (SavedLibrary) objectInputStream.readObject();
-                LibraryServiceImpl.setBooks(savedLibrary.getSavedBooks());
-                loginServiceImpl.setAccountList(savedLibrary.getSavedAccounts());
-            }
-            catch (Exception e){
-                throw new NoSuchDirectoryOrFile(PATH_OF_LIBRARY + "saved.JSON");
-            }
-
+            throw new NoSuchDirectoryException();
         }
     }
 
     @Override
-    public void saving(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl) throws NoSuchDirectoryOrFile {
-        String path = "/Users/annann/Desktop/Library/saved.JSON";
+    public String addBook(final String bookName, final String bookContent) throws BookAlreadyExistsException {
+        final Path pathToBook = Path.of(pathToLibrary + bookName);
         try {
-            FileOutputStream outputStream = new FileOutputStream(path);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(new SavedLibrary(loginServiceImpl.getAccountList(), libraryServiceImpl.getBooks()));
-            objectOutputStream.close();
+            Files.createFile(pathToBook);
+            Files.writeString(pathToBook, bookContent);
+        } catch (IOException e) {
+            throw new BookAlreadyExistsException(bookName);
         }
-        catch (Exception e){
-            throw new NoSuchDirectoryOrFile(path);
-        }
-
+        return bookName;
     }
 
-    public static void setLibraryOpen(boolean libraryOpen) {
-        isLibraryOpen = libraryOpen;
+    @Override
+    public void deleteBook(final String bookName) throws NoSuchBookException {
+        final Path pathToBook = Path.of(pathToLibrary + bookName);
+        try {
+            Files.delete(pathToBook);
+        } catch (IOException e) {
+            throw new NoSuchBookException(bookName);
+        }
     }
 
+    @SneakyThrows
+    private String getBookContent(final String s) {
+        return Files.readString(Path.of(s));
+    }
 }

@@ -1,10 +1,12 @@
 package exception;
 
-public class NoSuchDirectoryOrFile extends Exception{
-    public NoSuchDirectoryOrFile() {
-    }
+import java.io.IOException;
+
+public class NoSuchDirectoryOrFile extends IOException {
+
+    private static final String EXCEPTION_MESSAGE = "No such directory or file by path [%s]";
 
     public NoSuchDirectoryOrFile(String message) {
-        super("No such directory or file by path " + message);
+        super(EXCEPTION_MESSAGE.formatted(message));
     }
 }

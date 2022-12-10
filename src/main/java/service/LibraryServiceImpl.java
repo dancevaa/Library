@@ -1,105 +1,57 @@
 package service;
 
-import dto.Book;
-import exception.*;
+import exception.BookAlreadyExistsException;
+import exception.NoSuchBookException;
+import exception.NoSuchDirectoryException;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.log4j.Log4j;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Scanner;
 
-
-@Log4j
+@Slf4j
 public class LibraryServiceImpl implements LibraryService {
+    private final Scanner scanner;
+    private final StorageService storageService;
 
-    private static List<Book> books;
-    private final String PATH_OF_LIBRARY = "/Users/annann/Desktop/Library/";
-    private final String CONTENT_FILE = "/content_of_book.txt";
-    private final Scanner scanner = new Scanner(System.in);
-
-    @Override
-    public void addBook() {
-        try {
-            log.info("Enter the name of book");
-            String bookName = scanner.nextLine();
-            log.info("Enter the content of book");
-            String bookContent = scanner.nextLine();
-            books.add(new Book(bookName, bookContent));
-            log.info("Book is added");
-            createDirectoryAndFile(bookName, bookContent);
-        } catch (Exception e) {
-            log.info("Book is already exists");
-        }
-
+    public LibraryServiceImpl(final Scanner scanner, final StorageService storageService) {
+        this.storageService = storageService;
+        this.scanner = scanner;
     }
 
     @Override
-    public void deleteBook() throws NoSuchDirectoryOrFile {
+    public void addBook() {
         log.info("Enter the name of book");
-        String bookName = scanner.nextLine();
-        if (books.stream().anyMatch(book -> book.getName().equals(bookName))) {
-            for (int i = 0; i < books.size(); i++) {
-                if (books.get(i).getName().equals(bookName)) {
-                    books.remove(i);
-                }
-            }
-            log.info("Book is deleted");
-        } else {
-            log.info("There is no such book");
+        final String bookName = scanner.nextLine();
+        log.info("Enter the content of book");
+        final String bookContent = scanner.nextLine();
+        try {
+            final String book = storageService.addBook(bookName, bookContent);
+            log.info("Book [%s] was successfully added".formatted(book));
+        } catch (BookAlreadyExistsException e) {
+            log.warn(e.getMessage());
         }
-        deleteDirectoryAndFile(bookName);
+    }
+
+    @Override
+    public void deleteBook() {
+        log.info("Enter the name of book to delete");
+        final String bookName = scanner.nextLine();
+        try {
+            storageService.deleteBook(bookName);
+            log.info("Book [%s] was deleted".formatted(bookName));
+        } catch (NoSuchBookException e) {
+            log.warn(e.getMessage());
+        }
     }
 
     @Override
     public void readBook() {
+        log.info("Enter the name of book");
+        final String bookName = scanner.nextLine();
         try {
-            log.info("Enter the name of book");
-            String bookName = scanner.nextLine();
-            BufferedReader buff = new BufferedReader(new FileReader(PATH_OF_LIBRARY + bookName + CONTENT_FILE));
-            log.info(buff.readLine());
-            buff.close();
-        } catch (Exception e) {
-            log.info("Book is not found");
+            final String bookContent = storageService.getBook(bookName);
+            log.info(bookContent);
+        } catch (NoSuchDirectoryException | NoSuchBookException e) {
+            log.warn(e.getMessage());
         }
-    }
-
-    @Override
-    public void createDirectoryAndFile(String name, String content) throws FileIsAlreadyExist {
-        Path pathOfBook = Path.of(PATH_OF_LIBRARY + name);
-        Path pathOfFile = Path.of(PATH_OF_LIBRARY + name + CONTENT_FILE);
-        try {
-            Files.createDirectory(pathOfBook);
-            Files.createFile(pathOfFile);
-            Files.writeString(pathOfFile, content);
-        }
-        catch (Exception e){
-            throw new FileIsAlreadyExist(pathOfBook.toString());
-        }
-    }
-
-    @Override
-    public void deleteDirectoryAndFile(String name) throws NoSuchDirectoryOrFile {
-        Path pathOfFile = Path.of(PATH_OF_LIBRARY + name + CONTENT_FILE);
-        Path pathOfBook = Path.of(PATH_OF_LIBRARY + name);
-        try{
-            Files.delete(pathOfFile);
-            Files.delete(pathOfBook);
-        }
-        catch (Exception e){
-            throw new NoSuchDirectoryOrFile(pathOfFile.toString());
-        }
-
-    }
-
-    public static List<Book> getBooks() {
-        return books;
-    }
-
-    public static void setBooks(List<Book> books) {
-        LibraryServiceImpl.books = books;
     }
 }

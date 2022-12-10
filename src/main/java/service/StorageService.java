@@ -1,11 +1,12 @@
 package service;
-import exception.*;
 
+import exception.BookAlreadyExistsException;
 
 public interface StorageService {
-    void openLibrary(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl, MenuServiceImpl menuServiceImpl) throws NoSuchDirectoryOrFile;
 
-    void openOrCreateLibrary(LoginServiceImpl loginServiceImpl) throws FileIsAlreadyExist, NoSuchDirectoryOrFile;
+    String getBook(String bookName);
 
-    void saving(LoginServiceImpl loginServiceImpl, LibraryServiceImpl libraryServiceImpl) throws NoSuchDirectoryOrFile;
+    String addBook(String bookName, String bookContent) throws BookAlreadyExistsException;
+
+    void deleteBook(String bookName);
 }

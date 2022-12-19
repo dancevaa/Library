@@ -17,6 +17,6 @@ public enum Action {
     }
 
     public static Action findAction(final String action) {
-        return Action.valueOf(action.toLowerCase());
+        return Action.valueOf(action.toUpperCase());
     }
 }

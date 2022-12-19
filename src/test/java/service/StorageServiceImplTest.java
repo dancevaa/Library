@@ -64,7 +64,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void shouldAddBook() {
+    void shouldAddBook() throws BookAlreadyExistsException {
         storageService = new StorageServiceImpl(libraryPath);
         final String actual = storageService.addBook(TEST_BOOK_NAME, TEST_BOOK_CONTENT);
         verifyBookWasCreatedWithRequiredContent(actual, TEST_BOOK_CONTENT);

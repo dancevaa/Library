@@ -1,26 +1,31 @@
 package service;
 
 import exception.BookAlreadyExistsException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Scanner;
 
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-class LibraryServiceImplTest {
+@ExtendWith(MockitoExtension.class)
+public class LibraryServiceImplTest {
     private static final String TEST_BOOK_NAME = "testBookName";
     private static final String TEST_BOOK_CONTENT = "testBookContent";
 
     @Mock
-    private StorageServiceImpl storageService;
+    StorageServiceImpl storageService;
     @Mock
-    private Scanner scanner;
+    Scanner scanner;
+
     private LibraryService libraryService;
 
+    @BeforeEach
+    public void setup() {
+    }
 
     @Test
     void addBook() throws BookAlreadyExistsException {
@@ -28,6 +33,7 @@ class LibraryServiceImplTest {
         when(storageService.addBook(TEST_BOOK_NAME, TEST_BOOK_NAME)).thenReturn(TEST_BOOK_NAME);
         libraryService = new LibraryServiceImpl(scanner, storageService);
 
+        libraryService.addBook();
     }
 
     @Test

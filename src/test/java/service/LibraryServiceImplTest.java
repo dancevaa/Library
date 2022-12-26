@@ -1,6 +1,7 @@
 package service;
 
 import exception.BookAlreadyExistsException;
+import exception.NoSuchBookException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,10 +38,18 @@ public class LibraryServiceImplTest {
     }
 
     @Test
-    void deleteBook() {
+    void deleteBook() throws NoSuchBookException {
+        when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
+        storageService.deleteBook(TEST_BOOK_NAME);
+        libraryService = new LibraryServiceImpl(scanner, storageService);
+        libraryService.deleteBook();
     }
 
     @Test
     void readBook() {
+        when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
+        when(storageService.getBook(TEST_BOOK_NAME)).thenReturn(TEST_BOOK_CONTENT);
+        libraryService = new LibraryServiceImpl(scanner, storageService);
+        libraryService.readBook();
     }
 }

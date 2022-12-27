@@ -38,7 +38,7 @@ public class LibraryServiceImplTest {
     }
 
     @Test
-    void deleteBook() throws NoSuchBookException {
+    void deleteBook() {
         when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
         storageService.deleteBook(TEST_BOOK_NAME);
         libraryService = new LibraryServiceImpl(scanner, storageService);

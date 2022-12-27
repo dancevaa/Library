@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="addad maven support">
-      <change afterPath="$PROJECT_DIR$/src/test/java/service/MenuServiceImplTest.java" afterDir="false" />
+    <list default="true" id="973bef7c-91de-4efa-85dd-a18d007c1b8e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/service/LibraryServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/service/LibraryServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/service/MenuServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/service/MenuServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,23 +65,7 @@
       <recent name="service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MenuServiceImplTest.choosingActionAdd">
-    <configuration name="LibraryServiceImplTest.addBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.LibraryServiceImplTest" />
-      <option name="METHOD_NAME" value="addBook" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.MenuServiceImplTest.run">
     <configuration name="LibraryServiceImplTest.deleteBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Library" />
       <extension name="coverage">
@@ -99,7 +82,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryServiceImplTest.readBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuServiceImplTest.choosingAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Library" />
       <extension name="coverage">
         <pattern>
@@ -108,8 +91,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.LibraryServiceImplTest" />
-      <option name="METHOD_NAME" value="readBook" />
+      <option name="MAIN_CLASS_NAME" value="service.MenuServiceImplTest" />
+      <option name="METHOD_NAME" value="choosingAction" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -131,7 +114,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StorageServiceImplTest.shouldAddBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuServiceImplTest.run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Library" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.MenuServiceImplTest" />
+      <option name="METHOD_NAME" value="run" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StorageServiceImplTest.shouldGetBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Library" />
       <extension name="coverage">
         <pattern>
@@ -141,7 +140,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="service" />
       <option name="MAIN_CLASS_NAME" value="service.StorageServiceImplTest" />
-      <option name="METHOD_NAME" value="shouldAddBook" />
+      <option name="METHOD_NAME" value="shouldGetBook" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MenuServiceImplTest.choosingActionAdd" />
-        <item itemvalue="JUnit.LibraryServiceImplTest.readBook" />
+        <item itemvalue="JUnit.MenuServiceImplTest.run" />
+        <item itemvalue="JUnit.MenuServiceImplTest.choosingAction" />
         <item itemvalue="JUnit.LibraryServiceImplTest.deleteBook" />
-        <item itemvalue="JUnit.LibraryServiceImplTest.addBook" />
-        <item itemvalue="JUnit.StorageServiceImplTest.shouldAddBook" />
+        <item itemvalue="JUnit.StorageServiceImplTest.shouldGetBook" />
+        <item itemvalue="JUnit.MenuServiceImplTest.choosingActionAdd" />
       </list>
     </recent_temporary>
   </component>
@@ -306,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669632642063</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="addad maven support">
+      <created>1672069326987</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1672069326987</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,5 +353,13 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Library$StorageServiceImplTest_shouldGetBook.ic" NAME="StorageServiceImplTest.shouldGetBook Coverage Results" MODIFIED="1672141160795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Library$MenuServiceImplTest_choosingActionAdd.ic" NAME="MenuServiceImplTest.choosingActionAdd Coverage Results" MODIFIED="1672140836030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
   </component>
 </project>

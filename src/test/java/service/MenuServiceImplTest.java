@@ -1,6 +1,9 @@
 package service;
 
 import dto.Action;
+import exception.NoSuchActionException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -9,8 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MenuServiceImplTest {
@@ -19,26 +21,58 @@ class MenuServiceImplTest {
     private static final String ACTION_READ = "READ";
     private static final String ACTION_EXIT = "EXIT";
 
-    @Mock
-    Scanner scanner;
+    private static final String ACTION_NOT_SUPPORTED = "ACTION_NOT_SUPPORTED";
 
     @Mock
-    LibraryServiceImpl libraryService;
+    private Scanner scanner;
+
+    @Mock
+    private LibraryServiceImpl libraryService;
+    private MenuServiceImpl menuService;
+
+    @BeforeEach
+    void beforeEach(){
+        menuService = new MenuServiceImpl(scanner, libraryService);
+    }
+
+    @AfterEach
+    void afterEach(){
+        verifyNoMoreInteractions(scanner, libraryService);
+    }
 
     @Test
-    void choosingAction() {
+    void shouldChooseAction() {
         when(scanner.nextLine()).thenReturn(ACTION_ADD);
-        MenuServiceImpl menuService = new MenuServiceImpl(scanner, libraryService);
         Action action = menuService.choosingAction();
         assertEquals(Action.ADD, action);
         verify(scanner).nextLine();
     }
 
+    @Test
+    void shouldThrowExceptionIfActionDoesNotSupport() {
+        when(scanner.nextLine()).thenReturn(ACTION_NOT_SUPPORTED);
+        assertThrows(NoSuchActionException.class, menuService::choosingAction);
+        verify(scanner).nextLine();
+    }
+
 
     @Test
-    void run() {
-        MenuServiceImpl menuService = new MenuServiceImpl(scanner, libraryService);
+    void shouldCheckAllActions() {
         when(scanner.nextLine()).thenReturn(ACTION_ADD, ACTION_DELETE, ACTION_READ, ACTION_EXIT);
+        doNothing().when(libraryService).addBook();
+        doNothing().when(libraryService).deleteBook();
+        doNothing().when(libraryService).readBook();
         menuService.run();
+        verify(scanner, times(4)).nextLine();
+        verify(libraryService).addBook();
+        verify(libraryService).readBook();
+        verify(libraryService).deleteBook();
+    }
+
+    @Test
+    void shouldThrowExceptionIfActionIsNotCorrect(){
+        when(scanner.nextLine()).thenReturn(ACTION_NOT_SUPPORTED, ACTION_EXIT);
+        menuService.run();
+        verify(scanner, times(2)).nextLine();
     }
 }

@@ -1,5 +1,9 @@
 package service;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.read.ListAppender;
 import exception.BookAlreadyExistsException;
 import exception.NoSuchActionException;
 import exception.NoSuchBookException;
@@ -9,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.LoggerFactory;
+import util.MemoryAppender;
 
 import java.util.Scanner;
 
@@ -20,6 +26,7 @@ public class LibraryServiceImplTest {
     private static final String TEST_BOOK_NAME = "testBookName";
     private static final String TEST_BOOK_CONTENT = "testBookContent";
     private static final String EXIST_BOOK = "existBook";
+    private static final String MESSAGE = "Book with name [%s] already exists";
     private static final String EXIST_BOOK_CONTENT = "existBookContent";
 
 
@@ -29,11 +36,15 @@ public class LibraryServiceImplTest {
     Scanner scanner;
 
     private LibraryService libraryService;
+    private MemoryAppender memoryAppender;
 
     @BeforeEach
     public void setup() {
         libraryService = new LibraryServiceImpl(scanner, storageService);
+        configureLogListener();
     }
+
+
 
     @AfterEach
     void afterEach(){
@@ -49,12 +60,15 @@ public class LibraryServiceImplTest {
         verify(storageService).addBook(TEST_BOOK_NAME, TEST_BOOK_NAME);
     }
 
-//    @Test
-//    void shouldThrowExceptionIfBookIsAlreadyExist() throws BookAlreadyExistsException {
-//        when(scanner.nextLine()).thenReturn(EXIST_BOOK);
-//        when(storageService.addBook(EXIST_BOOK, EXIST_BOOK_CONTENT)).thenReturn(EXIST_BOOK);
-//        assertThrows(BookAlreadyExistsException.class, ()-> libraryService.addBook());
-//    }
+    @Test
+    void shouldThrowExceptionIfBookIsAlreadyExist() throws BookAlreadyExistsException {
+        when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
+        when(storageService.addBook(TEST_BOOK_NAME, TEST_BOOK_NAME)).thenThrow(new BookAlreadyExistsException(TEST_BOOK_NAME));
+        libraryService.addBook();
+
+        verify(scanner, times(2)).nextLine();
+        verify(storageService).addBook(TEST_BOOK_NAME, TEST_BOOK_NAME);
+    }
 
     @Test
     void shouldDeleteBook() {
@@ -72,5 +86,14 @@ public class LibraryServiceImplTest {
         libraryService.readBook();
         verify(scanner).nextLine();
         verify(storageService).getBook(TEST_BOOK_NAME);
+    }
+
+    private void configureLogListener() {
+        Logger logger = (Logger) LoggerFactory.getLogger(LibraryServiceImpl.class);
+        memoryAppender = new MemoryAppender();
+        memoryAppender.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
+        logger.setLevel(Level.DEBUG);
+        logger.addAppender(memoryAppender);
+        memoryAppender.start();
     }
 }

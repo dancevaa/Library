@@ -7,11 +7,13 @@ import ch.qos.logback.core.read.ListAppender;
 import exception.BookAlreadyExistsException;
 import exception.NoSuchActionException;
 import exception.NoSuchBookException;
+import exception.NoSuchDirectoryException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.LoggerFactory;
 import util.MemoryAppender;
@@ -25,10 +27,6 @@ import static org.mockito.Mockito.*;
 public class LibraryServiceImplTest {
     private static final String TEST_BOOK_NAME = "testBookName";
     private static final String TEST_BOOK_CONTENT = "testBookContent";
-    private static final String EXIST_BOOK = "existBook";
-    private static final String MESSAGE = "Book with name [%s] already exists";
-    private static final String EXIST_BOOK_CONTENT = "existBookContent";
-
 
     @Mock
     StorageServiceImpl storageService;
@@ -41,9 +39,8 @@ public class LibraryServiceImplTest {
     @BeforeEach
     public void setup() {
         libraryService = new LibraryServiceImpl(scanner, storageService);
-        configureLogListener();
+//        configureLogListener();
     }
-
 
 
     @AfterEach
@@ -80,6 +77,15 @@ public class LibraryServiceImplTest {
     }
 
     @Test
+    void shouldThrowExceptionIfBookIsNotExists(){
+        when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
+        Mockito.doThrow(new NoSuchBookException(TEST_BOOK_NAME)).doNothing().when(storageService).deleteBook(TEST_BOOK_NAME);
+        libraryService.deleteBook();
+        verify(scanner).nextLine();
+        verify(storageService).deleteBook(TEST_BOOK_NAME);
+    }
+
+    @Test
     void shouldReadBook() {
         when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
         when(storageService.getBook(TEST_BOOK_NAME)).thenReturn(TEST_BOOK_CONTENT);
@@ -88,12 +94,23 @@ public class LibraryServiceImplTest {
         verify(storageService).getBook(TEST_BOOK_NAME);
     }
 
-    private void configureLogListener() {
-        Logger logger = (Logger) LoggerFactory.getLogger(LibraryServiceImpl.class);
-        memoryAppender = new MemoryAppender();
-        memoryAppender.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
-        logger.setLevel(Level.DEBUG);
-        logger.addAppender(memoryAppender);
-        memoryAppender.start();
+    @Test
+    void shouldThrowExceptionIfNoSuchDirectory(){
+        when(scanner.nextLine()).thenReturn(TEST_BOOK_NAME);
+        when(storageService.getBook(TEST_BOOK_NAME)).thenThrow(new NoSuchDirectoryException());
+        libraryService.readBook();
+        verify(scanner).nextLine();
+        verify(storageService).getBook(TEST_BOOK_NAME);
     }
+
+
+
+//    private void configureLogListener() {
+//        Logger logger = (Logger) LoggerFactory.getLogger(LibraryServiceImpl.class);
+//        memoryAppender = new MemoryAppender();
+//        memoryAppender.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
+//        logger.setLevel(Level.DEBUG);
+//        logger.addAppender(memoryAppender);
+//        memoryAppender.start();
+//    }
 }
